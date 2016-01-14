@@ -18,10 +18,10 @@ $data = [
 
 if ($_ENV['TUTUM_NODE_FQDN']) {
     $data["host"] = [
-        "internal hostname" => $_ENV['TUTUM_NODE_FQDN'],
-        "internal ip" => gethostbyname($_ENV['TUTUM_NODE_FQDN']),
-        "external hostname" => $_ENV['TUTUM_NODE_HOSTNAME'],
-        "external ip" => gethostbyname($_ENV['TUTUM_NODE_HOSTNAME']),
+        "external hostname" => $_ENV['TUTUM_NODE_FQDN'],
+        "external ip" => gethostbyname($_ENV['TUTUM_NODE_FQDN']),
+        "internal hostname" => $_ENV['TUTUM_NODE_HOSTNAME'],
+        "internal ip" => gethostbyname($_ENV['TUTUM_NODE_HOSTNAME']),
     ];
 }
 
