@@ -1,19 +1,29 @@
 <?php
 
 $data = [
-    "host" => [
-        "HTTP_HOST" => $_SERVER["HTTP_HOST"],
-        "SERVER_NAME" => $_SERVER["SERVER_NAME"],
-        "SERVER_ADDR" => $_SERVER["SERVER_ADDR"],
-        "SERVER_HOST" => gethostbyaddr($_SERVER["SERVER_ADDR"]),
-        "SERVER_PORT" => $_SERVER["SERVER_PORT"],
+    "request" => [
+        "host" => $_SERVER["HTTP_HOST"],
     ],
-    "remote" => [
-        "REMOTE_ADDR" => $_SERVER["REMOTE_ADDR"],
-        "REMOTE_HOST" => gethostbyaddr($_SERVER["REMOTE_ADDR"]),
-        "REMOTE_PORT" => $_SERVER["REMOTE_PORT"],
+    "container" => [
+        "hostname" => gethostbyaddr($_SERVER["SERVER_ADDR"]),
+        "ip" => $_SERVER["SERVER_ADDR"],
+        "port" => $_SERVER["SERVER_PORT"],
+    ],
+    "proxy (remote)" => [
+        "hostname" => gethostbyaddr($_SERVER["REMOTE_ADDR"]),
+        "ip" => $_SERVER["REMOTE_ADDR"],
+        "port" => $_SERVER["REMOTE_PORT"],
     ],
 ];
+
+if ($_ENV['TUTUM_NODE_FQDN']) {
+    $data["host"] = [
+        "internal hostname" => $_ENV['TUTUM_NODE_FQDN'],
+        "internal ip" => gethostbyname($_ENV['TUTUM_NODE_FQDN']),
+        "external hostname" => $_ENV['TUTUM_NODE_HOSTNAME'],
+        "external ip" => gethostbyname($_ENV['TUTUM_NODE_HOSTNAME']),
+    ];
+}
 
 $data['tutum'] = [];
 
