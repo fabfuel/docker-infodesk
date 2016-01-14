@@ -5,13 +5,17 @@ $data = [
         "HTTP_HOST" => $_SERVER["HTTP_HOST"],
         "SERVER_NAME" => $_SERVER["SERVER_NAME"],
         "SERVER_ADDR" => $_SERVER["SERVER_ADDR"],
+        "SERVER_HOST" => gethostbyaddr($_SERVER["SERVER_ADDR"]),
         "SERVER_PORT" => $_SERVER["SERVER_PORT"],
     ],
     "remote" => [
         "REMOTE_ADDR" => $_SERVER["REMOTE_ADDR"],
+        "REMOTE_HOST" => gethostbyaddr($_SERVER["REMOTE_ADDR"]),
         "REMOTE_PORT" => $_SERVER["REMOTE_PORT"],
     ],
 ];
+
+$data['tutum'] = [];
 
 foreach ($_ENV as $key => $value) {
     if (strpos($key, 'TUTUM') === 0) {
@@ -32,6 +36,7 @@ foreach ($_ENV as $key => $value) {
 <div class="container">
 
     <?php foreach ($data as $title => $values): ?>
+        <?php if (!$values): continue; endif; ?>
         <div class="panel">
             <table class="table table-striped">
                 <tr class="info">
